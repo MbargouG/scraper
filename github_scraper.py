@@ -11,7 +11,7 @@ def index():
 def get_user_info():
     username = request.form["username"]
     # Replace YOUR_GITHUB_TOKEN with your own GitHub API token
-    headers = {'Authorization': 'token YOUR_GITHUB_TOKEN'}
+    headers = {'Authorization': 'token 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'}
     # Make a request for user information based on the username
     response = requests.get(f'https://api.github.com/users/{username}', headers=headers)
     if response.status_code == 200:
