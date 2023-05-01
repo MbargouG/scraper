@@ -1,13 +1,6 @@
 import requests
 import json
-from flask import Flask, render_template, request
-import requests
 
-app = Flask(__name__)
-
-@app.route("/")
-def index():
-    return render_template("index.html")
 
 @app.route("/get_user_info", methods=["POST"])
 def get_user_info():
