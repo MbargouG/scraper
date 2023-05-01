@@ -11,15 +11,16 @@ def index():
 @app.route('/search', methods=['GET'])
 def search():
     username = request.args.get('username')
-    url = 'https://github.com/{}/'.format(username)
-    response = requests.get(url)
+    url = 'https://api.github.com/users/{}/repos'.format(username)
+    headers = {'Authorization': 'token YOUR_GITHUB_TOKEN'}
+    response = requests.get(url, headers=headers)
 
     if response.status_code == 200:
-        soup = BeautifulSoup(response.content, 'html.parser')
-        repo_name = soup.find("strong", class_="mr-2 flex-self-stretch").text.strip()
-        repo_desc = soup.find("p", class_="f4 mt-3").text.strip()
-        stars = soup.find("a", class_="social-count js-social-count").text.strip()
-        forks = soup.find_all("a", class_="social-count")[1].text.strip()
+        repos = response.json()
+        repo_name = repos[0]['name']
+        repo_desc = repos[0]['description']
+        stars = repos[0]['stargazers_count']
+        forks = repos[0]['forks_count']
         return render_template('result.html', repo_name=repo_name, repo_desc=repo_desc, stars=stars, forks=forks)
     else:
         return "Failed to retrieve data from GitHub"
