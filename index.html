@@ -18,12 +18,20 @@
 </head>
 <body>
     <h1>GitHub Data Scraper</h1>
+    <form action="/search" method="get">
+        <label for="username">Enter a GitHub username:</label>
+        <input type="text" id="username" name="username"><br><br>
+        <input type="submit" value="Search">
+    </form>
+
+    {% if repo_name %}
     <ul>
         <li>Repository name: {{ repo_name }}</li>
         <li>Repository description: {{ repo_desc }}</li>
         <li>Number of stars: {{ stars }}</li>
         <li>Number of forks: {{ forks }}</li>
     </ul>
+    {% endif %}
 
     <!-- Dark mode toggle button -->
     <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
