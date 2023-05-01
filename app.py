@@ -12,7 +12,7 @@ def index():
 def search():
     username = request.args.get('username')
     url = 'https://api.github.com/users/{}/repos'.format(username)
-    headers = {'Authorization': 'token YOUR_GITHUB_TOKEN'}
+    headers = {'Authorization': 'token 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'}
     response = requests.get(url, headers=headers)
 
     if response.status_code == 200:
