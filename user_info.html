@@ -1,15 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>User Info</title>
+    <title>GitHub User Information</title>
+    <style>
+        /* Default color scheme */
+        body {
+            background-color: #F6F8FA;
+            color: #24292E;
+        }
+
+        /* Dark mode color scheme */
+        body.dark-mode {
+            background-color: #24292E;
+            color: #F6F8FA;
+        }
+    </style>
 </head>
 <body>
-    <h1>User Info</h1>
-    <p>Username: {{ user_info["login"] }}</p>
-    <p>Name: {{ user_info["name"] }}</p>
-    <p>Location: {{ user_info["location"] }}</p>
-    <p>Public Repositories: {{ user_info["public_repos"] }}</p>
-    <p>Followers: {{ user_info["followers"] }}</p>
-    <p>Following: {{ user_info["following"] }}</p>
+    <h1>GitHub User Information</h1>
+    <h2>{{ user_info.name }}</h2>
+    <img src="{{ user_info.avatar_url }}" alt="Profile Picture" width="200">
+    <p>{{ user_info.bio }}</p>
+    <p>Followers: {{ user_info.followers }}</p>
+    <p>Following: {{ user_info.following }}</p>
+    <p>Public Repositories: {{ user_info.public_repos }}</p>
+
+    <!-- Dark mode toggle button -->
+    <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+
+    <script>
+        function toggleDarkMode() {
+            // Toggle the 'dark-mode' class on the body element
+            document.body.classList.toggle('dark-mode');
+        }
+    </script>
 </body>
 </html>
