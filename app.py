@@ -1,29 +1,25 @@
 from flask import Flask, render_template, request
 import requests
-from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route("/")
 def index():
-    return render_template('index.html')
+    return render_template("index.html")
 
-@app.route('/search', methods=['GET'])
-def search():
-    username = request.args.get('username')
-    url = 'https://api.github.com/users/{}/repos'.format(username)
-    headers = {'Authorization': 'token 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'}
-    response = requests.get(url, headers=headers)
-
+@app.route("/get_user_info", methods=["POST"])
+def get_user_info():
+    username = request.form["username"]
+    # Replace YOUR_GITHUB_TOKEN with your own GitHub API token
+    headers = {"Authorization": "token YOUR_GITHUB_TOKEN"}
+    # Make a request for the user's profile data
+    response = requests.get(f"https://api.github.com/users/{username}", headers=headers)
     if response.status_code == 200:
-        repos = response.json()
-        repo_name = repos[0]['name']
-        repo_desc = repos[0]['description']
-        stars = repos[0]['stargazers_count']
-        forks = repos[0]['forks_count']
-        return render_template('result.html', repo_name=repo_name, repo_desc=repo_desc, stars=stars, forks=forks)
+        # Parse and extract the relevant data
+        user_info = response.json()
+        return render_template("user_info.html", user_info=user_info)
     else:
-        return "Failed to retrieve data from GitHub"
+        return "Failed to get user info"
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)
