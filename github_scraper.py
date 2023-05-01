@@ -11,7 +11,7 @@ def index():
 def search_users():
     query = request.args.get('query')
     # Replace YOUR_GITHUB_TOKEN with your own GitHub API token
-    headers = {'Authorization': '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'}
+    headers = {'Authorization': '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'}
     # Make a request for searching users based on the query
     response = requests.get(f'https://api.github.com/search/users?q={query}', headers=headers)
     if response.status_code == 200:
