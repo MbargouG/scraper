@@ -8,7 +8,7 @@ def get_user_info():
 username = request.form['username']
 
 # Replace YOUR_GITHUB_TOKEN with your own GitHub API token
-headers = {'Authorization': 'token YOUR_GITHUB_TOKEN'}
+headers = {'Authorization': 'token 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'}
 
 # Make a request for the user information
 response = requests.get(f'https://api.github.com/users/{username}', headers=headers)
@@ -19,7 +19,3 @@ if response.status_code == 200:
     return render_template("user_info.html", user_info=user_info)
 else:
     return "Failed to retrieve user information"
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
